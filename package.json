@@ -1,7 +1,7 @@
 {
-  "name": "three-boilerplate",
+  "name": "coral.tree.js",
   "version": "0.1.0",
-  "description": "A simple Three.js boilerplate",
+  "description": "Procedurally generate trees in Three.js",
   "author": "Matthias De Vriendt (fauxnoir) <devriendt.matthias@gmail.com>",
   "devDependencies": {
     "coffeelint": "^1.10.1",

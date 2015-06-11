@@ -1,13 +1,14 @@
 {
-  "name": "three-boilerplate",
-  "version": "0.0.1",
+  "name": "coral.tree.js",
+  "version": "0.1.0",
   "authors": [
     "Matthias De Vriendt (fauxnoir) <devriendt.matthias@gmail.com>"
   ],
-  "description": "A simple Three.js boilerplate",
+  "description": "Procedurally generate trees in Three.js",
   "keywords": [
     "three",
-    "boilerplate"
+    "boilerplate",
+    "coral"
   ],
   "license": "MIT",
   "ignore": [
@@ -19,18 +20,7 @@
   ],
   "dependencies": {
     "threejs": "*",
-    "stats.js": "*",
-    "dat-gui": "~0.5.1",
-    "sketch.js": "*",
-    "normalize.css": "~3.0.3",
-    "threex.rendererstats": "*"
-  },
-  "overrides": {
-    "sketch.js": {
-      "main": "bower_components/sketch.js/js/sketch.js"
-    },
-    "dat-gui": {
-      "main": "bower_components/dat-gui/build/dat.gui.js"
-    }
+    "coral.blob.js": "~0.2.0",
+    "simplexnoise.js": "~0.5.3"
   }
 }
