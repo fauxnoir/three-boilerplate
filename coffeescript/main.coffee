@@ -22,17 +22,15 @@ demo = Sketch.create({
   setup: ->
 
     @camera = new THREE.PerspectiveCamera(45, @.width / @.height, 1, 10000 )
-    @camera.position.z = 2.4
+    @camera.position.z = 1000
 
     @scene = new THREE.Scene()
 
-    @objTree = Coral.Tree()
+    geometry = new THREE.CubeGeometry( 200, 200, 200)
+    material = new THREE.MeshBasicMaterial { color: 0xFFFFFF, wireframe: true }
+    @mesh = new THREE.Mesh( geometry, material )
 
-    @light = new THREE.HemisphereLight( 0xffeed1, 0x404040, 1.2)
-    @light.position.set(10, 10,10)
-
-    @scene.add(@light)
-    @scene.add(@objTree)
+    @scene.add(@mesh)
 
   resize: ->
     @camera.aspect = @.width / @.height
@@ -45,8 +43,8 @@ demo = Sketch.create({
     ## Start of stats.js monitored code.
     stats.begin()
 
-    # @objTree.rotation.x += 0.01
-    @objTree.rotation.y += 0.02
+    @mesh.rotation.x += 0.01
+    @mesh.rotation.y += 0.02
 
     renderer.render( @scene, @camera )
 
