@@ -22,7 +22,7 @@ Coral.Tree = function() {
   coloursTrunk = [0x9a8261];
   coloursCanopy = [0xaa4b2d, 0xc8b849, 0xa4a045, 0xd1cd5f, 0xb0a13b];
   hTrunk = random(0.6, 1);
-  wTrunk = 0.065;
+  wTrunk = 0.05;
   geoTrunk = new THREE.BoxGeometry(wTrunk, hTrunk, wTrunk, 1, 3, 1);
 
   /*
@@ -49,7 +49,7 @@ Coral.Tree = function() {
   options = {
     smoothing: 2,
     radius: cpyRadius,
-    detail: 2,
+    detail: 1,
     noiseOptions: {
       amplitude: 1.0,
       frequency: 2,
