@@ -1,133 +1,91 @@
 module.exports = (grunt) ->
 
-  grunt.initConfig {
-    pkg: grunt.file.readJSON 'package.json'
+	grunt.initConfig {
+		pkg: grunt.file.readJSON 'package.json'
 
-    # Wiredep config. Insert Bower packages into html files
-    wiredep: {
-      task: {
-        src:['src/index.html']
-      }
-    }
+		# Wiredep config. Insert Bower packages into html files
+		wiredep: {
+			task: {
+				src:['index.html']
+			}
+		}
 
-    bower: {
-    dev: {
-        dest: 'src/'
-        js_dest:'src/js/vendor'
-        css_dest: 'src/css/vendor'
-      }
+		# Watch files for changes and execute rlated tasks on them 
+		watch: {
+			coffee: {
+				files: 'coffeescript/*.coffee'
+				tasks: 'coffee:compile'
+			}
 
-    build: {
-        dest: 'build/'
-        js_dest: 'build/examples/js/vendor'
-        css_dest: 'build/examples/css/vendor'
-      }
-    }
+			sass: {
+				files: 'scss/*.scss'
+				tasks: 'sass:compile'
+			}
 
-    watch: {
-      coffee: {
-        files: 'src/coffeescript/*.coffee'
-        tasks: 'coffee:compile'
-      }
+			bower: {
+				files: 'bower.json'
+				tasks: 'wiredep'
+			}
 
-      sass: {
-        files: 'src/scss/*.scss'
-        tasks: 'sass:compile'
-      }
+		}
 
-      bower: {
-        files: 'bower.json'
-        tasks: 'wiredep'
-      }
+		# Configuration and targets for the coffee task
+		coffee: {
+			compile: {
+				options: {
+					bare: true
+					join: true
+					sourceMap: true
+				}
 
-    }
+				files: {
+					'js/main.js': 'coffeescript/*.coffee'
+				}
+			}
+		}
 
-    coffee: {
-      compile: {
-        options: {
-          bare: true
-          join: true
-          sourceMap: true
-        }
+		sass: {
+			options: {
+		    	sourceMap: true
+			}
+			compile: {
+			    files: {
+			        'css/main.css': 'scss/main.scss'
+			    }
+			}
+	   	}
 
-        files: {
-          'src/js/main.js': 'src/coffeescript/*.coffee'
-        }
-      }
-
-      build: {
-        options: {
-          bare: true
-          join: true
-          sourceMap: false
-        }
-
-        files: {
-          'build/js/coral.tree.js': 'src/coffeescript/coral.tree.coffee'
-        }
-      }
-    }
-
-    sass: {
-      options: {
-          sourceMap: true
-      }
-      compile: {
-          files: {
-              'src/css/main.css': 'src/scss/main.scss'
-          }
-      }
-      }
-
-    coffeelint: {
-      lint: 'src/coffeescript/*.coffee'
-    }
-
-    uglify: {
-      minify: {
-        files: {
-          'build/js/coral.tree.min.js': 'build/js/coral.tree.js'
-        }
-      }
-    }
-
-    copy: {
-      build: {
-        files: [
-          {expand: false, src: ['src/index.html'], dest: 'build/examples/index.html', filter: 'isFile'}
-        ]
-      }
-    }
-
-    # Configuration for browser sync (auto refresh)
-    browserSync: {
-      bsFiles: {
-        src: ['src/js/*.js', 'src/css/*.css', 'src/index.html']
-      }
-
-      options: {
-        proxy: 'boilerplate.dev'
-        # server: {
-        #   baseDir: 'src/'
-        # }
-      }
-    }
-
-  }
-
-  # Load the grunt-wiredep task. This injects Bower components into html files
-  grunt.loadNpmTasks 'grunt-wiredep'
-  grunt.loadNpmTasks 'grunt-bower'
-  grunt.loadNpmTasks 'grunt-contrib-watch' 
-  grunt.loadNpmTasks 'grunt-contrib-coffee' 
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-coffeelint'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
-  grunt.loadNpmTasks 'grunt-browser-sync'
-  grunt.loadNpmTasks 'grunt-sass'
+		coffeelint: {
+			lint: 'coffeescript/*.coffee'
+		}
 
 
-  
+		# Configuration for browser sync (auto refresh)
+		browserSync: {
+			bsFiles: {
+				src: ['js/*.js', 'css/*.css', 'index.html']
+			}
 
-  #  Default task(s)
-  grunt.registerTask 'default', ['browserSync']
+			options: {
+				proxy: 'boilerplate.dev'
+				# server: {
+				# 	baseDir: 'src/'
+				# }
+			}
+		}
+
+	}
+
+	# Load the grunt-wiredep task. This injects Bower components into html files
+	grunt.loadNpmTasks 'grunt-wiredep'
+	grunt.loadNpmTasks 'grunt-contrib-watch' 
+	grunt.loadNpmTasks 'grunt-contrib-coffee' 
+	grunt.loadNpmTasks 'grunt-coffeelint'
+	grunt.loadNpmTasks 'grunt-browser-sync'
+	grunt.loadNpmTasks 'grunt-sass'
+
+
+	
+
+	#  Default task(s)
+	grunt.registerTask 'default', ['browserSync']
